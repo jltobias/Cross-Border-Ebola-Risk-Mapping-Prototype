@@ -1,0 +1,6 @@
+[
+  "tests/test_risk.py::test_monte_carlo_scores_shape",
+  "tests/test_risk.py::test_normalize_series_constant_returns_zero",
+  "tests/test_risk.py::test_risk_tiers_length",
+  "tests/test_risk.py::test_weighted_sum_bounds"
+]
