@@ -1,0 +1,44 @@
+spillover_suitability:
+  bat_roost_proximity: 0.18
+  bat_habitat_suitability: 0.18
+  forest_edge_density: 0.14
+  recent_deforestation: 0.12
+  mine_cave_karst_proximity: 0.12
+  orchard_fruit_tree_interface: 0.10
+  wildlife_human_interface: 0.08
+  elevation_suitability: 0.04
+  river_wetland_interface: 0.04
+
+human_exposure:
+  population_density: 0.24
+  settlement_building_density: 0.16
+  road_accessibility: 0.14
+  mining_activity: 0.12
+  orchard_agriculture_activity: 0.10
+  conflict_displacement_pressure: 0.10
+  market_border_crossing_access: 0.08
+  health_seeking_accessibility: 0.06
+
+importation_pressure:
+  active_case_pressure: 0.35
+  road_travel_time_from_affected_zones: 0.25
+  border_crossing_connectivity: 0.16
+  population_mobility_proxy: 0.12
+  conflict_route_disruption: 0.07
+  airstrip_airport_connectivity: 0.05
+
+facility_vulnerability:
+  catchment_population: 0.15
+  distance_to_border_corridor: 0.12
+  time_to_isolation_referral: 0.15
+  time_to_lab_sample_referral: 0.12
+  facility_level_readiness: 0.16
+  ipc_readiness_gap: 0.14
+  surveillance_reporting_gap: 0.10
+  community_event_surveillance_gap: 0.06
+
+combined_risk:
+  spillover_suitability: 0.25
+  human_exposure: 0.25
+  importation_pressure: 0.30
+  facility_vulnerability: 0.20

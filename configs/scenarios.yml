@@ -1,0 +1,52 @@
+scenarios:
+  baseline:
+    description: Current best-estimate weights and mobility assumptions.
+    multipliers: {}
+
+  improved_screening:
+    description: Higher detection at border points and facility triage.
+    multipliers:
+      facility_vulnerability: 0.80
+      importation_pressure: 0.90
+    parameters:
+      detection_probability_increase: 0.25
+      isolation_delay_reduction_days: 1.5
+
+  faster_isolation:
+    description: Improved sample referral, isolation, and case management workflow.
+    multipliers:
+      facility_vulnerability: 0.70
+    parameters:
+      isolation_delay_reduction_days: 2.5
+      sample_transport_time_reduction: 0.30
+
+  conflict_disruption:
+    description: Increased insecurity, delayed reporting, and displacement-driven mixing.
+    multipliers:
+      conflict_displacement_pressure: 1.40
+      importation_pressure: 1.20
+      facility_vulnerability: 1.25
+    parameters:
+      reporting_delay_increase_days: 3
+      road_access_penalty: 0.25
+
+  mining_corridor_surge:
+    description: Increased occupational exposure and cross-border movement around mines.
+    multipliers:
+      mining_activity: 1.60
+      mine_cave_karst_proximity: 1.35
+      road_accessibility: 1.10
+
+  deforestation_displacement_shock:
+    description: Habitat disturbance plus displaced human population movement.
+    multipliers:
+      recent_deforestation: 1.50
+      forest_edge_density: 1.20
+      conflict_displacement_pressure: 1.25
+
+monte_carlo:
+  n_iterations: 1000
+  weight_distribution: dirichlet
+  concentration: 40
+  random_seed: 42
+  output_quantiles: [0.05, 0.25, 0.50, 0.75, 0.95]

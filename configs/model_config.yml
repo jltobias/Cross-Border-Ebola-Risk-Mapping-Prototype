@@ -1,0 +1,57 @@
+project:
+  name: cross_border_ebola_risk_mapping_prototype
+  description: Ecological niche, spillover, importation, and facility risk mapping for the DRC-South Sudan corridor.
+  default_crs: EPSG:6933        # World Cylindrical Equal Area; suitable regional equal-area analysis
+  raw_crs: EPSG:4326
+  grid_resolution_m: 1000
+  nodata_value: -9999
+
+paths:
+  gis_root: GIS
+  data_raw: data/raw
+  data_interim: data/interim
+  data_processed: data/processed
+  outputs: outputs
+  maps: outputs/maps
+  tables: outputs/tables
+  figures: outputs/figures
+  reports: outputs/reports
+
+aoi:
+  countries:
+    - SSD
+    - COD
+    - UGA
+  focus_country: SSD
+  border_neighbors:
+    - COD
+    - UGA
+  border_buffer_km: 250
+  outbreak_corridor_buffer_km: 400
+  include_admin_levels:
+    - admin0
+    - admin1
+    - admin2
+
+model_components:
+  spillover_suitability: true
+  human_exposure: true
+  importation_pressure: true
+  facility_vulnerability: true
+  uncertainty: true
+
+facility_outputs:
+  risk_tiers:
+    method: quantile
+    labels: [low, moderate, high, very_high]
+  driver_count: 5
+  catchment_summary_stats: [mean, max, median, p90]
+
+validation:
+  spatial_block_k: 5
+  holdout_by_admin: true
+  random_seed: 42
+
+jupyterlite:
+  enabled: true
+  note: Full geospatial notebooks require GDAL/rasterio/geopandas and are not expected to run in plain JupyterLite. Use notebooks_lite for browser-only demos.

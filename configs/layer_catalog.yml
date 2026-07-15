@@ -1,0 +1,138 @@
+# Local project layers and external data source manifest.
+# Update the local path patterns after running scripts/build_layer_catalog.py.
+
+local_layers:
+  admin_boundaries:
+    path_patterns: ["GIS/admin*/*", "GIS/boundar*/*"]
+    geometry: polygon
+    required: true
+    model_use: [aoi, reporting_units]
+
+  health_facilities:
+    path_patterns: ["GIS/health*/*", "GIS/facilit*/*"]
+    geometry: point
+    required: true
+    model_use: [facility_risk, catchment_summary]
+
+  facility_catchments:
+    path_patterns: ["GIS/catchment*/*"]
+    geometry: polygon
+    required: false
+    model_use: [catchment_summary]
+
+  ebola_cases:
+    path_patterns: ["GIS/ebola*/*", "GIS/case*/*", "GIS/outbreak*/*"]
+    geometry: point_or_polygon
+    required: false
+    sensitivity: high
+    model_use: [importation_pressure, validation]
+
+  bat_roosts_occurrences:
+    path_patterns: ["GIS/bat*/*", "GIS/roost*/*", "GIS/wildlife*/*"]
+    geometry: point
+    required: false
+    sensitivity: high
+    model_use: [spillover_suitability, enm]
+
+  forests:
+    path_patterns: ["GIS/forest*/*", "GIS/tree*/*"]
+    geometry: raster_or_polygon
+    required: false
+    model_use: [spillover_suitability, forest_edge]
+
+  deforestation:
+    path_patterns: ["GIS/deforest*/*", "GIS/loss*/*", "GIS/gfc*/*"]
+    geometry: raster
+    required: false
+    model_use: [spillover_suitability, disturbance]
+
+  mines_caves_karst:
+    path_patterns: ["GIS/mine*/*", "GIS/cave*/*", "GIS/karst*/*"]
+    geometry: point_or_polygon
+    required: false
+    model_use: [human_animal_interface]
+
+  osm_transport_buildings_water:
+    path_patterns: ["GIS/osm*/*", "GIS/roads*/*", "GIS/buildings*/*", "GIS/water*/*", "GIS/rivers*/*"]
+    geometry: mixed
+    required: false
+    model_use: [accessibility, exposure, corridors]
+
+  worldpop_population:
+    path_patterns: ["GIS/worldpop*/*", "GIS/population*/*"]
+    geometry: raster
+    required: false
+    model_use: [human_exposure, catchment_population]
+
+  conflict_events:
+    path_patterns: ["GIS/conflict*/*", "GIS/acled*/*", "GIS/security*/*"]
+    geometry: point
+    required: false
+    model_use: [displacement_pressure, vulnerability]
+
+  elevation_dem:
+    path_patterns: ["GIS/elevation*/*", "GIS/dem*/*", "GIS/srtm*/*"]
+    geometry: raster
+    required: false
+    model_use: [enm_covariate, terrain]
+
+  orchards_agriculture:
+    path_patterns: ["GIS/orchard*/*", "GIS/agriculture*/*", "GIS/crop*/*", "GIS/fruit*/*"]
+    geometry: polygon_or_raster
+    required: false
+    model_use: [fruit_bat_human_interface]
+
+external_sources:
+  worldpop:
+    description: High-resolution population denominators; use national GeoTIFFs where possible.
+    url: https://www.worldpop.org/
+    access: public_download
+    notes: Store downloaded rasters under GIS/worldpop/ or data/raw/worldpop/.
+
+  osm_geofabrik_south_sudan:
+    description: OSM roads, buildings, waterways, places, POIs for South Sudan.
+    url: https://download.geofabrik.de/africa/south-sudan.html
+    access: public_download
+    notes: Prefer GPKG or PBF; derive roads, buildings, waterways, landuse=orchard, natural=cave_entrance, and mining POIs.
+
+  osm_geofabrik_drc:
+    description: OSM roads, buildings, waterways, places, POIs for DRC.
+    url: https://download.geofabrik.de/africa/congo-democratic-republic.html
+    access: public_download
+    notes: Clip to eastern DRC and corridor AOI.
+
+  hansen_global_forest_change:
+    description: Global forest cover and loss bands derived from Landsat time series.
+    url: https://developers.google.com/earth-engine/datasets/catalog/UMD_hansen_global_forest_change_2025_v1_13
+    access: google_earth_engine
+    notes: Use treecover2000, loss, lossyear, gain, datamask bands; export AOI tiles.
+
+  wri_forest_loss_drivers:
+    description: Dominant drivers of tree cover loss at about 1 km resolution.
+    url: https://datasets.wri.org/datasets/dominant-drivers-of-tree-cover-loss-at-1km-v1-2
+    access: public_download
+    notes: Use as a contextual covariate; note limitations around planted trees and mixed drivers.
+
+  gbif_bat_occurrences:
+    description: Bat occurrence records for candidate reservoir/interface species.
+    url: https://techdocs.gbif.org/en/data-use/api-downloads
+    access: account_required_for_bulk_download
+    notes: Use GBIF downloads with DOI; filter by taxonomy, coordinate validity, basis of record, and date.
+
+  acled_conflict:
+    description: Conflict and political violence event data.
+    url: https://acleddata.com/api-documentation/getting-started
+    access: account_required
+    notes: Use event_date, event_type, fatalities, coordinates; account for reporting delays.
+
+  protected_planet:
+    description: Protected areas and OECMs for habitat and access context.
+    url: https://api.protectedplanet.net/documentation
+    access: token_required
+    notes: Use only under applicable terms.
+
+  local_mines_caves_karst:
+    description: Project-provided mines, shafts, caves, cave entrances, karst features.
+    url: null
+    access: local_project_data
+    notes: Treat exact locations carefully if there are security or wildlife-protection concerns.

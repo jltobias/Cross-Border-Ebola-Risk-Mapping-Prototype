@@ -1,0 +1,13 @@
+classifications:
+  public:
+    examples: [admin boundaries, public OSM roads, public land cover]
+    handling: Can be committed if license allows.
+  controlled:
+    examples: [facility readiness attributes, catchment vulnerability scores]
+    handling: Keep in private storage; publish only aggregate summaries.
+  sensitive:
+    examples: [case line lists, exact roosts, exact caves used by protected species]
+    handling: Do not commit to public repositories; mask, aggregate, or jitter for demos.
+  restricted:
+    examples: [personally identifiable case data, contact lists]
+    handling: Never include in this repository.
