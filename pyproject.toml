@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "cberm-ebola-risk"
 version = "0.1.0"
 description = "Cross-border Ebola ecological niche and facility risk mapping scaffold"
-readme = "README_EBOLA_RISK_WORKFLOW.md"
+readme = "README.md"
 requires-python = ">=3.10"
 authors = [{name = "Cross-Border Ebola Risk Mapping Prototype contributors"}]
 license = {text = "MIT"}
