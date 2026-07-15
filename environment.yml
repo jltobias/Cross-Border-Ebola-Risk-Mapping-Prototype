@@ -1,0 +1,37 @@
+name: cberm-ebola-risk
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - jupyterlab
+  - notebook
+  - ipykernel
+  - numpy
+  - pandas
+  - geopandas
+  - shapely
+  - pyproj
+  - rasterio
+  - rioxarray
+  - xarray
+  - dask
+  - netcdf4
+  - scipy
+  - scikit-learn
+  - matplotlib
+  - folium
+  - mapclassify
+  - osmnx
+  - networkx
+  - rasterstats
+  - pyyaml
+  - tqdm
+  - requests
+  - pooch
+  - pyarrow
+  - pytest
+  - pip:
+      - elapid
+      - jupyterlite-core
+      - jupyterlite-pyodide-kernel

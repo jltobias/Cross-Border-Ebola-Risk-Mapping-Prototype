@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cberm-ebola-risk"
+version = "0.1.0"
+description = "Cross-border Ebola ecological niche and facility risk mapping scaffold"
+readme = "README_EBOLA_RISK_WORKFLOW.md"
+requires-python = ">=3.10"
+authors = [{name = "Cross-Border Ebola Risk Mapping Prototype contributors"}]
+license = {text = "MIT"}
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
