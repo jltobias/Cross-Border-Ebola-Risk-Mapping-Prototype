@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environments and local secrets
+.env
+.venv/
+venv/
+env/
+.conda/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Project outputs and intermediate geospatial products
+outputs/
+data/interim/
+data/processed/
+data/raw/
+
+# Raster sidecar/cache files
+*.aux.xml
+*.ovr
+*.tif.ovr
+*.tiff.ovr
+
+# Large/local GIS archives and temporary files
+*.zip
+*.7z
+*.tar
+*.tar.gz
+*.tmp
+*.log
